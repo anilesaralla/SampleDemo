@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+  <title>Automation Test Report</title>
+  <meta charset='utf-8'>
+  <meta name="description" content="Automation Execution Summary Report">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="main.js"></script>
+</head>
+ 
+ 
+ <style>
+ .btn-primary-spacing 
+	{
+	margin-right: 5px;
+	margin-bottom: 5px !important;
+	}
+	
+
+ </style>
+ 
+ 
+ <body>
+ <div ng-app="myApp" ng-controller="cont">
+ 	<div class="table-responsive">	
+
+		
+		<table class="table bg-warning"  >
+		
+		<tr>
+		<th class="text-center">
+			<td width = "10%" align=right><img src="C:\Automation\Shared\Templates\Clientlogo.png" class="navbar-brand" name="Vodafone" style="width: 180px; height: 80px;"/></td>
+			<td class="text-center"><h2>Automation Test Detailed Report</h2></td>
+			<td width = "10%" align=left></td>
+		</th>
+		</tr>
+		
+		
+		
+		</table>
+		
+		<table class="table table-bordered">
+		<tr>
+		<td class="bg-primary"  width="15%">Application</td><td class="bg-warning"><!-- Inject Application --></td>
+		<td class="bg-primary"  width="15%">Execution Date</td><td class="bg-warning"><!-- Inject Date --></td>
+		<td class="bg-primary"  width="15%">Total Test Steps</td><td class="bg-warning" id="totalScenarios" width="15%"></td>
+		</tr>
+		<tr>
+		<td class="bg-primary"  width="15%">State</td><td class="bg-warning"><!-- Inject State --></td>
+		<td class="bg-primary"  width="15%">Test Start Time</td><td class="bg-warning" ><!-- Inject Starttime --></td>
+		<td class="bg-primary"  width="15%">Total Steps Passed</td><td class="bg-warning" id="passRow" width="15%"></td>
+		</tr>
+		<tr>
+		<td class="bg-primary"  width="15%">Scenario Name</td><td class="bg-warning"><!-- Inject TestName --></td>
+		<td class="bg-primary"  width="15%">Test End Time</td><td class="bg-warning" ><!-- Inject Endtime --></td>
+		<td class="bg-primary"  width="15%">Total Steps Failed</td><td class="bg-warning" id="failRow" width="15%"></td>
+		<!-- <td width="15%">Executed By:</td><td></td> -->
+		</tr>
+		
+		<tr>
+		<td class="bg-primary"  width="15%">App Version | Build Number</td><td class="bg-warning"><!-- Inject Build --></td>
+		<td class="bg-primary"  width="15%">Total Duration</td><td class="bg-warning"><!-- Inject Duration --></td>
+		<td class="bg-primary"  width="15%">Total Steps Skipped</td><td class="bg-warning" id="skipRow" width="15%"></td>
+		</tr>
+		
+		<tr>
+		<td class="bg-primary"  width="15%">Windows Version</td><td class="bg-warning"><!-- Inject Windows Version --></td>
+		<td class="bg-primary"  width="15%">VM Name | IP Address</td><td class="bg-warning"><!-- VM Name --></td>
+		<td class="bg-primary"  width="15%">Executed By</td><td class="bg-warning"><!-- Inject Executed By --></td>
+		<!--td class="bg-primary"  width="15%">Total Steps Skipped</td><td class="bg-warning" id="skipRow" width="15%"></td-->
+		</tr>
+		
+		
+		
+		
+		</table>
+		
+
+		
+		
+		
+ <!--		<table id="chartTable" style="width:40%">
+		<tr><td align="center" id="piechart" style="width: 300px; height: 300px;"></td></tr>
+		</table> -->
+		
+		<div><span class="pull-right" id="piechart" style="width: 450px; height: 400px;"></span></div>
+
+		<div class="btn-group">
+		  <button type="button" class="btn btn-success btn-primary-spacing  btn-sm mt-4 mr-2 mb-2" id="passFilter">Pass</button>
+		  <button type="button" class="btn btn-danger btn-primary-spacing  btn-sm mt-4 mr-2 mb-2" id="failFilter">Fail</button>
+		  <button type="button" class="btn btn-warning btn-primary-spacing  btn-sm mt-4 mr-2 mb-2" id="skipFilter">Skip</button>
+		  <button type="button" class="btn btn-info btn-primary-spacing  btn-sm mt-4 mr-2 mb-2" id="clearstatusFilter">Clear Filter</button>
+		</div>
+		 
+		<table class = "table table-sm table-bordered table-hover" name="tablename" id="resulttable" style="width:55%" >
+			<thead>
+				<tr>
+				<!-- <th class="bg-primary">Sl No</th> -->
+				<td class="bg-primary" width="7%">Step #</td>
+				<td class="bg-primary" width="60%">Step Description</td>
+				<td class="bg-primary" width="10%">Status</td>
+				<td class="bg-primary" width="23%">Comments</td>
+				<!-- <th class="bg-primary">Failed Steps</th>
+				<th class="bg-primary">Skipped Steps</th>
+				<th class="bg-primary">Total</th> -->
+				</tr>
+			</thead>	
+			
+				<tbody id="summaryRow">
+				<!-- Inject Result Row TR -->
+				</tbody>		
+			
+			</tr>	
+			
+		</table>
+		
+		
+	</div>	
+	
+
+
+</div>
+
+
+<script>
+var app = angular.module('myApp', []);   
+app.controller('cont',function($scope){
+
+	$scope.cdate = new Date();
+	$scope.cdate1 = new Date() + 1;
+	
+	$scope.difference = function (fromDate, toDate) {
+		if (fromDate && toDate) {
+			/*alert(fromDate);
+			alert(toDate);*/
+			return Math.abs((new Date(toDate).getTime() - new Date(fromDate).getTime()));
+		}
+	};
+		
+		
+});
+</script> 
+<script>
+var passtests= $('#resulttable tbody tr td.bg-success').length;
+document.getElementById("passRow").innerHTML = passtests;
+
+var failtests= $('#resulttable tbody tr td.bg-danger').length ;
+document.getElementById("failRow").innerHTML = failtests;
+
+var skippedtests= $('#resulttable tbody tr td.bg-warning').length;
+document.getElementById("skipRow").innerHTML = skippedtests;
+
+document.getElementById("totalScenarios").innerHTML = passtests+failtests+skippedtests
+
+var startTime = $('#resulttable tbody tr:first td.stime').text();
+
+document.getElementById("starttime").innerHTML = startTime;
+var endTime = $('#resulttable tbody tr:last td.etime').text();
+document.getElementById("endtime").innerHTML = endTime;
+
+</script>
+
+<script>
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+	var passtests= $('#resulttable tbody tr td.bg-success').length;
+	var failtests= $('#resulttable tbody tr td.bg-danger').length ;
+	var skippedtests= $('#resulttable tbody tr td.bg-warning').length;
+	var data = google.visualization.arrayToDataTable([
+	  ['Status', 'Total Scenarios'],
+	  ['Not Executed',     0],
+	  ['Failed',      failtests],
+	  ['Skipped',  skippedtests],
+	  ['Passed', passtests],
+	]);
+
+	var options = {
+	  title: 'Scenario Summary chart',
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+	chart.draw(data, options);
+  }
+  
+  
+</script>
+
+<script>
+$(document).ready(function(){
+    $("#passFilter").click(function(){
+		$("#resulttable tbody tr td.bg-warning").parent().hide();
+		$("#resulttable tbody tr td.bg-danger").parent().hide();
+		$("#resulttable tbody tr td.bg-info").parent().hide();
+		$("#resulttable tbody tr td.bg-success").parent().show();
+		$("#resulttable tbody tr td.bg-warning").parent().hide();
+		$("#resulttable tbody tr td.bg-danger").parent().hide();
+		$("#resulttable tbody tr td.bg-info").parent().hide();
+		$("#resulttable tbody tr td.bg-success").parent().show();
+    });
+    $("#failFilter").click(function(){
+		$("#resulttable tbody tr td.bg-warning").parent().hide();
+		$("#resulttable tbody tr td.bg-danger").parent().show();
+		$("#resulttable tbody tr td.bg-info").parent().hide();
+		$("#resulttable tbody tr td.bg-success").parent().hide()
+		$("#resulttable tbody tr td.bg-warning").parent().hide();
+		$("#resulttable tbody tr td.bg-danger").parent().show();
+		$("#resulttable tbody tr td.bg-info").parent().hide();
+		$("#resulttable tbody tr td.bg-success").parent().hide();
+    });
+	$("#skipFilter").click(function(){
+        $("#resulttable tbody tr td.bg-warning").parent().show();
+		$("#resulttable tbody tr td.bg-danger").parent().hide();
+		$("#resulttable tbody tr td.bg-info").parent().hide();
+		$("#resulttable tbody tr td.bg-success").parent().hide();
+		$("#resulttable tbody tr td.bg-warning").parent().show();
+		$("#resulttable tbody tr td.bg-danger").parent().hide();
+		$("#resulttable tbody tr td.bg-info").parent().hide();
+		$("#resulttable tbody tr td.bg-success").parent().hide();
+    });
+	$("#unknownFilter").click(function(){
+        $("#resulttable tbody tr td.bg-warning").parent().hide();
+		$("#resulttable tbody tr td.bg-danger").parent().hide();
+		$("#resulttable tbody tr td.bg-info").parent().show();
+		$("#resulttable tbody tr td.bg-success").parent().hide();
+		$("#resulttable tbody tr td.bg-warning").parent().hide();
+		$("#resulttable tbody tr td.bg-danger").parent().hide();
+		$("#resulttable tbody tr td.bg-info").parent().show();
+		$("#resulttable tbody tr td.bg-success").parent().hide();
+    });
+	$("#clearstatusFilter").click(function(){
+        $("#resulttable tbody tr td.bg-warning").parent().show();
+		$("#resulttable tbody tr td.bg-danger").parent().show();
+		$("#resulttable tbody tr td.bg-info").parent().show();
+		$("#resulttable tbody tr td.bg-success").parent().show();
+		$("#resulttable tbody tr td.bg-warning").parent().show();
+		$("#resulttable tbody tr td.bg-danger").parent().show();
+		$("#resulttable tbody tr td.bg-info").parent().show();
+		$("#resulttable tbody tr td.bg-success").parent().show();
+    });
+	
+});
+</script>
+	
+</body>
+</html>
